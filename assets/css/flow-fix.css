@@ -1,0 +1,33 @@
+/* Responsive two-row project flow. */
+.pipe {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 0.55rem;
+  align-items: center;
+  min-width: 0;
+  padding: 1.25rem;
+}
+
+.pipe span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  min-height: 54px;
+  padding: 0.55rem;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.pipe i {
+  color: var(--blue);
+  font-style: normal;
+  font-weight: 800;
+}
+
+.pipe .flow-break {
+  grid-column: 1 / -1;
+  justify-self: center;
+  min-height: auto;
+  line-height: 1;
+}
