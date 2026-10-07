@@ -31,3 +31,54 @@
   min-height: auto;
   line-height: 1;
 }
+
+@media (max-width: 600px) {
+  #particles-js {
+    min-height: 100svh;
+  }
+
+  .header {
+    width: calc(100% - 28px);
+  }
+
+  .header .site-title {
+    font-size: clamp(2.25rem, 12vw, 3.4rem);
+  }
+
+  .hero-copy {
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
+  .header-icons {
+    font-size: 0.9rem;
+  }
+
+  .about-layout,
+  .timeline article,
+  .project-card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .section-head h2 {
+    font-size: 2rem;
+  }
+
+  .profile {
+    width: 100%;
+    max-width: none;
+  }
+
+  .project-card h3 {
+    font-size: 1.4rem;
+  }
+
+  .checks {
+    grid-template-columns: 1fr;
+  }
+
+  .pipe,
+  .abod {
+    width: 100%;
+  }
+}
