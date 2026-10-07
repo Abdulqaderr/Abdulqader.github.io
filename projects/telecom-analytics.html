@@ -1,0 +1,17 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Telecom Customer Analytics portfolio case study by Abdulqader Hussein"><title>Telecom Customer Analytics | Abdulqader Hussein</title><link rel="stylesheet" href="../assets/css/project-details.css"></head><body>
+<nav class="case-nav"><a href="../index.html#projects">← Back to portfolio</a><span>Abdulqader Hussein · Data Portfolio</span></nav>
+<header class="case-hero"><label>Analytics case study</label><h1>Telecom Customer Analytics</h1><p>A portfolio-safe, synthetic analytics project that turns customer, plan, usage, billing, payment, and support data into actionable growth and retention insights.</p><div class="case-tags"><span>SQL</span><span>BigQuery</span><span>Python</span><span>Power BI</span></div></header>
+<main class="case-main"><p class="note">This case study uses synthetic data and does not contain employer or customer information.</p>
+<div class="case-grid"><article class="case-card"><h2>Business problem</h2><p>Commercial and service teams need one trusted view of subscriber health, revenue, plan performance, and early churn signals.</p></article><article class="case-card"><h2>Data model</h2><p>Customers and plans connect to subscriptions, usage, invoices, payments, and support tickets through governed identifiers and date dimensions.</p></article></div>
+<section class="case-section"><h2>Analytical flow</h2><div class="flow"><span>Source data</span><i>→</i><span>BigQuery staging</span><i>→</i><span>SQL models</span><i>→</i><span>KPI marts</span><i>→</i><span>Power BI</span></div></section>
+<section class="case-section"><h2>Core KPIs</h2><div class="kpis"><div><small>Monthly revenue</small><b>SAR 4.8M</b></div><div><small>Active users</small><b>42.6K</b></div><div><small>ARPU</small><b>SAR 112</b></div><div><small>Churn</small><b>2.9%</b></div></div></section>
+<section class="case-section"><h2>Questions answered</h2><div class="case-grid"><article class="case-card"><ul><li>Monthly active users and revenue trend</li><li>Customer churn and retention cohorts</li><li>ARPU by segment and plan</li><li>Top three plans each month</li></ul></article><article class="case-card"><ul><li>High-value customer segments</li><li>Customers with usage decline above 30%</li><li>Payment behavior and overdue invoices</li><li>Support demand by customer segment</li></ul></article></div></section>
+<section class="case-section"><h2>Example SQL pattern</h2><div class="code">WITH monthly_usage AS (
+  SELECT customer_id, DATE_TRUNC(usage_date, MONTH) AS month,
+         SUM(data_gb) AS usage_gb
+  FROM analytics.fact_usage
+  GROUP BY 1, 2
+)
+SELECT *, LAG(usage_gb) OVER (PARTITION BY customer_id ORDER BY month) AS prior_usage
+FROM monthly_usage;</div></section>
+<section class="case-section"><h2>Outcome</h2><p>A reusable semantic layer and dashboard design that gives business teams consistent definitions, faster analysis, and clear customer-risk signals.</p></section></main><footer class="case-footer">Synthetic portfolio case study · Abdulqader Hussein</footer></body></html>

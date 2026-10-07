@@ -1,0 +1,14 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Data quality and reconciliation framework case study"><title>Data Quality Framework | Abdulqader Hussein</title><link rel="stylesheet" href="../assets/css/project-details.css"></head><body>
+<nav class="case-nav"><a href="../index.html#projects">← Back to portfolio</a><span>Abdulqader Hussein · Data Portfolio</span></nav><header class="case-hero"><label>Data reliability</label><h1>Data Quality &amp; Reconciliation Framework</h1><p>An automated control layer that compares operational sources with warehouse targets and makes data failures visible, measurable, and actionable.</p><div class="case-tags"><span>Python</span><span>SQL</span><span>CDC</span><span>Automation</span></div></header>
+<main class="case-main"><p class="note">Framework design uses synthetic examples and excludes employer data, schemas, and business rules.</p><section class="case-section"><h2>Validation flow</h2><div class="flow"><span>Extract source</span><i>→</i><span>Resolve CDC latest state</span><i>→</i><span>Compare target</span><i>→</i><span>Classify variance</span><i>→</i><span>Report</span></div></section>
+<div class="case-grid"><article class="case-card"><h2>Completeness</h2><ul><li>Source and target record counts</li><li>Missing business keys</li><li>Deleted-record handling</li></ul></article><article class="case-card"><h2>Uniqueness</h2><ul><li>Duplicate business keys</li><li>ROW_NUMBER deduplication</li><li>Unexpected fan-out checks</li></ul></article><article class="case-card"><h2>Accuracy</h2><ul><li>Attribute-level mismatches</li><li>Null and domain validation</li><li>Aggregated amount reconciliation</li></ul></article><article class="case-card"><h2>Freshness</h2><ul><li>CDC event lag</li><li>Latest-record logic</li><li>Pipeline watermark checks</li></ul></article></div>
+<section class="case-section"><h2>Latest-record SQL</h2><div class="code">SELECT * EXCEPT(row_num)
+FROM (
+  SELECT *, ROW_NUMBER() OVER (
+    PARTITION BY business_id
+    ORDER BY cdc_timestamp DESC, sequence_number DESC
+  ) AS row_num
+  FROM raw.cdc_events
+)
+WHERE row_num = 1 AND operation != 'DELETE';</div></section>
+<section class="case-section"><h2>Automated output</h2><p>Python orchestrates parameterized checks, writes exceptions to audit tables, produces summary metrics, and routes failures for investigation. Each result retains run time, rule, source, target, severity, and sample record keys.</p></section></main><footer class="case-footer">Synthetic portfolio case study · Abdulqader Hussein</footer></body></html>
